@@ -1,0 +1,429 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`dts 1`] = `
+[
+  {
+    "end": 37,
+    "loc": {
+      "end": Position {
+        "column": 21,
+        "index": 37,
+        "line": 3,
+      },
+      "start": Position {
+        "column": 16,
+        "index": 32,
+        "line": 3,
+      },
+    },
+    "name": "foo",
+    "start": 32,
+  },
+  {
+    "end": 65,
+    "loc": {
+      "end": Position {
+        "column": 27,
+        "index": 65,
+        "line": 4,
+      },
+      "start": Position {
+        "column": 17,
+        "index": 55,
+        "line": 4,
+      },
+    },
+    "name": "@foo/foo",
+    "start": 55,
+  },
+  {
+    "end": 97,
+    "loc": {
+      "end": Position {
+        "column": 31,
+        "index": 97,
+        "line": 5,
+      },
+      "start": Position {
+        "column": 22,
+        "index": 88,
+        "line": 5,
+      },
+    },
+    "name": "foo-foo",
+    "start": 88,
+  },
+  {
+    "end": 128,
+    "loc": {
+      "end": Position {
+        "column": 30,
+        "index": 128,
+        "line": 6,
+      },
+      "start": Position {
+        "column": 21,
+        "index": 119,
+        "line": 6,
+      },
+    },
+    "name": "foo.foo",
+    "start": 119,
+  },
+  {
+    "end": 167,
+    "loc": {
+      "end": Position {
+        "column": 38,
+        "index": 167,
+        "line": 7,
+      },
+      "start": Position {
+        "column": 25,
+        "index": 154,
+        "line": 7,
+      },
+    },
+    "name": "foo-foo-foo",
+    "start": 154,
+  },
+]
+`;
+
+exports[`js 1`] = `
+[
+  {
+    "end": 21,
+    "loc": {
+      "end": Position {
+        "column": 21,
+        "index": 21,
+        "line": 1,
+      },
+      "start": Position {
+        "column": 16,
+        "index": 16,
+        "line": 1,
+      },
+    },
+    "name": "foo",
+    "start": 16,
+  },
+  {
+    "end": 49,
+    "loc": {
+      "end": Position {
+        "column": 27,
+        "index": 49,
+        "line": 2,
+      },
+      "start": Position {
+        "column": 17,
+        "index": 39,
+        "line": 2,
+      },
+    },
+    "name": "@foo/foo",
+    "start": 39,
+  },
+  {
+    "end": 81,
+    "loc": {
+      "end": Position {
+        "column": 31,
+        "index": 81,
+        "line": 3,
+      },
+      "start": Position {
+        "column": 22,
+        "index": 72,
+        "line": 3,
+      },
+    },
+    "name": "foo-foo",
+    "start": 72,
+  },
+  {
+    "end": 112,
+    "loc": {
+      "end": Position {
+        "column": 30,
+        "index": 112,
+        "line": 4,
+      },
+      "start": Position {
+        "column": 21,
+        "index": 103,
+        "line": 4,
+      },
+    },
+    "name": "foo.foo",
+    "start": 103,
+  },
+  {
+    "end": 216,
+    "loc": {
+      "end": Position {
+        "column": 25,
+        "index": 216,
+        "line": 9,
+      },
+      "start": Position {
+        "column": 20,
+        "index": 211,
+        "line": 9,
+      },
+    },
+    "name": "bar",
+    "start": 211,
+  },
+  {
+    "end": 274,
+    "loc": {
+      "end": Position {
+        "column": 24,
+        "index": 274,
+        "line": 12,
+      },
+      "start": Position {
+        "column": 19,
+        "index": 269,
+        "line": 12,
+      },
+    },
+    "name": "baz",
+    "start": 269,
+  },
+]
+`;
+
+exports[`jsx 1`] = `
+[
+  {
+    "end": 21,
+    "loc": {
+      "end": Position {
+        "column": 21,
+        "index": 21,
+        "line": 1,
+      },
+      "start": Position {
+        "column": 16,
+        "index": 16,
+        "line": 1,
+      },
+    },
+    "name": "foo",
+    "start": 16,
+  },
+  {
+    "end": 49,
+    "loc": {
+      "end": Position {
+        "column": 27,
+        "index": 49,
+        "line": 2,
+      },
+      "start": Position {
+        "column": 17,
+        "index": 39,
+        "line": 2,
+      },
+    },
+    "name": "@foo/foo",
+    "start": 39,
+  },
+  {
+    "end": 81,
+    "loc": {
+      "end": Position {
+        "column": 31,
+        "index": 81,
+        "line": 3,
+      },
+      "start": Position {
+        "column": 22,
+        "index": 72,
+        "line": 3,
+      },
+    },
+    "name": "foo-foo",
+    "start": 72,
+  },
+  {
+    "end": 112,
+    "loc": {
+      "end": Position {
+        "column": 30,
+        "index": 112,
+        "line": 4,
+      },
+      "start": Position {
+        "column": 21,
+        "index": 103,
+        "line": 4,
+      },
+    },
+    "name": "foo.foo",
+    "start": 103,
+  },
+  {
+    "end": 165,
+    "loc": {
+      "end": Position {
+        "column": 25,
+        "index": 165,
+        "line": 7,
+      },
+      "start": Position {
+        "column": 20,
+        "index": 160,
+        "line": 7,
+      },
+    },
+    "name": "bar",
+    "start": 160,
+  },
+  {
+    "end": 223,
+    "loc": {
+      "end": Position {
+        "column": 24,
+        "index": 223,
+        "line": 10,
+      },
+      "start": Position {
+        "column": 19,
+        "index": 218,
+        "line": 10,
+      },
+    },
+    "name": "baz",
+    "start": 218,
+  },
+]
+`;
+
+exports[`ts 1`] = `
+[
+  {
+    "end": 37,
+    "loc": {
+      "end": Position {
+        "column": 21,
+        "index": 37,
+        "line": 3,
+      },
+      "start": Position {
+        "column": 16,
+        "index": 32,
+        "line": 3,
+      },
+    },
+    "name": "foo",
+    "start": 32,
+  },
+  {
+    "end": 65,
+    "loc": {
+      "end": Position {
+        "column": 27,
+        "index": 65,
+        "line": 4,
+      },
+      "start": Position {
+        "column": 17,
+        "index": 55,
+        "line": 4,
+      },
+    },
+    "name": "@foo/foo",
+    "start": 55,
+  },
+  {
+    "end": 97,
+    "loc": {
+      "end": Position {
+        "column": 31,
+        "index": 97,
+        "line": 5,
+      },
+      "start": Position {
+        "column": 22,
+        "index": 88,
+        "line": 5,
+      },
+    },
+    "name": "foo-foo",
+    "start": 88,
+  },
+  {
+    "end": 128,
+    "loc": {
+      "end": Position {
+        "column": 30,
+        "index": 128,
+        "line": 6,
+      },
+      "start": Position {
+        "column": 21,
+        "index": 119,
+        "line": 6,
+      },
+    },
+    "name": "foo.foo",
+    "start": 119,
+  },
+  {
+    "end": 167,
+    "loc": {
+      "end": Position {
+        "column": 38,
+        "index": 167,
+        "line": 7,
+      },
+      "start": Position {
+        "column": 25,
+        "index": 154,
+        "line": 7,
+      },
+    },
+    "name": "foo-foo-foo",
+    "start": 154,
+  },
+  {
+    "end": 220,
+    "loc": {
+      "end": Position {
+        "column": 25,
+        "index": 220,
+        "line": 10,
+      },
+      "start": Position {
+        "column": 20,
+        "index": 215,
+        "line": 10,
+      },
+    },
+    "name": "bar",
+    "start": 215,
+  },
+  {
+    "end": 278,
+    "loc": {
+      "end": Position {
+        "column": 24,
+        "index": 278,
+        "line": 13,
+      },
+      "start": Position {
+        "column": 19,
+        "index": 273,
+        "line": 13,
+      },
+    },
+    "name": "baz",
+    "start": 273,
+  },
+]
+`;
