@@ -1,6 +1,9 @@
 import { babelParse, walkAST } from 'ast-kit'
 import validateNpmPackageName from 'validate-npm-package-name'
+import type * as t from '@babel/types'
 import type { NpmPackage, Options } from './types'
+
+const RE_PACKAGE_NAME = /^(@[^/]+\/[^/@]+|[^/@]+)/
 
 /**
  * Find npm packages from given source code.
@@ -27,26 +30,52 @@ export function findNpmPackages(
   const program = babelParse(code, language, options)
   const packages: NpmPackage[] = []
 
-  function isNpmPackageName(name: string) {
-    const result = validateNpmPackageName(name)
-    return result.validForNewPackages || result.validForOldPackages
+  function getValidNpmPackageName(importString: string) {
+    const match = importString.match(RE_PACKAGE_NAME)
+
+    if (match) {
+      const name = match[0]
+      const result = validateNpmPackageName(name)
+
+      if (result.validForNewPackages || result.validForOldPackages) {
+        return name
+      }
+    }
+  }
+
+  function checkNpmPackageName(stringLiteral: t.StringLiteral) {
+    const name = getValidNpmPackageName(stringLiteral.value)
+
+    if (!name) return
+
+    const start = stringLiteral.start
+    const loc = stringLiteral.loc
+
+    if (start && loc) {
+      packages.push({
+        end: start + name.length + 1,
+        name,
+        start: start + 1,
+        loc: {
+          end: {
+            column: loc.start.column + name.length + 1,
+            index: loc.start.index + name.length + 1,
+            line: loc.start.line,
+          },
+          start: {
+            column: loc.start.column + 1,
+            index: loc.start.index + 1,
+            line: loc.start.line,
+          },
+        },
+      })
+    }
   }
 
   walkAST(program, {
     enter(node) {
-      if (
-        node.type === 'ImportDeclaration'
-        && isNpmPackageName(node.source.value)
-      ) {
-        packages.push({
-          end: node.source.end,
-          name: node.source.value,
-          start: node.source.start,
-          loc: {
-            end: node.source.loc?.end,
-            start: node.source.loc?.start,
-          },
-        })
+      if (node.type === 'ImportDeclaration') {
+        checkNpmPackageName(node.source)
       }
 
       // NOTE: ImportExpression is not supported
@@ -59,17 +88,8 @@ export function findNpmPackages(
           (isImportExpression || isRequireExpression)
           && node.arguments[0]
           && node.arguments[0].type === 'StringLiteral'
-          && isNpmPackageName(node.arguments[0].value)
         ) {
-          packages.push({
-            end: node.arguments[0].end,
-            name: node.arguments[0].value,
-            start: node.arguments[0].start,
-            loc: {
-              end: node.arguments[0].loc?.end,
-              start: node.arguments[0].loc?.start,
-            },
-          })
+          checkNpmPackageName(node.arguments[0])
         }
       }
     },

@@ -8,26 +8,26 @@ import FIXTURE_TS from './fixtures/ts.ts?raw'
 it('basic', () => {
   expect(findNpmPackages(`import findNpmPackages from 'find-npm-packages'`))
     .toMatchInlineSnapshot(`
-    [
-      {
-        "end": 47,
-        "loc": {
-          "end": Position {
-            "column": 47,
-            "index": 47,
-            "line": 1,
+      [
+        {
+          "end": 46,
+          "loc": {
+            "end": {
+              "column": 46,
+              "index": 46,
+              "line": 1,
+            },
+            "start": {
+              "column": 29,
+              "index": 29,
+              "line": 1,
+            },
           },
-          "start": Position {
-            "column": 28,
-            "index": 28,
-            "line": 1,
-          },
+          "name": "find-npm-packages",
+          "start": 29,
         },
-        "name": "find-npm-packages",
-        "start": 28,
-      },
-    ]
-  `)
+      ]
+    `)
 })
 
 it('js', () => {

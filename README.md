@@ -35,17 +35,17 @@ console.log(result)
 // [
 //   {
 //     "name": "find-npm-packages",
-//     "start": 28,
-//     "end": 47,
+//     "start": 29,
+//     "end": 46,
 //     "loc": {
 //       "end": {
-//         "column": 47,
-//         "index": 47,
+//         "column": 46,
+//         "index": 46,
 //         "line": 1,
 //       },
 //       "start": {
-//         "column": 28,
-//         "index": 28,
+//         "column": 29,
+//         "index": 29,
 //         "line": 1,
 //       },
 //     },
@@ -66,11 +66,11 @@ import type { ParserOptions } from '@babel/parser'
 
 export interface NpmPackage {
   name: string
-  end?: number | null
-  start?: number | null
-  loc?: {
-    end?: Position
-    start?: Position
+  end: number
+  start: number
+  loc: {
+    end: Position
+    start: Position
   }
 }
 

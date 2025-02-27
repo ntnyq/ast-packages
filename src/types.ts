@@ -1,12 +1,12 @@
 import type { ParserOptions } from '@babel/parser'
 
 export interface NpmPackage {
+  end: number | null
   name: string
-  end?: number | null
-  start?: number | null
-  loc?: {
-    end?: Position
-    start?: Position
+  start: number | null
+  loc: {
+    end: Position
+    start: Position
   }
 }
 
