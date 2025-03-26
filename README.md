@@ -3,7 +3,6 @@
 [![CI](https://github.com/ntnyq/find-npm-packages/workflows/CI/badge.svg)](https://github.com/ntnyq/find-npm-packages/actions)
 [![NPM VERSION](https://img.shields.io/npm/v/find-npm-packages.svg)](https://www.npmjs.com/package/find-npm-packages)
 [![NPM DOWNLOADS](https://img.shields.io/npm/dy/find-npm-packages.svg)](https://www.npmjs.com/package/find-npm-packages)
-[![CODECOV](https://codecov.io/github/ntnyq/find-npm-packages/branch/main/graph/badge.svg)](https://codecov.io/github/ntnyq/find-npm-packages)
 [![LICENSE](https://img.shields.io/github/license/ntnyq/find-npm-packages.svg)](https://github.com/ntnyq/find-npm-packages/blob/main/LICENSE)
 
 Find npm packages from given source code.

@@ -1,24 +1,21 @@
 {
   "compilerOptions": {
     "target": "ESNext",
-    "lib": ["DOM", "ES2022"],
+    "lib": ["ES2022"],
     "moduleDetection": "force",
     "module": "ESNext",
     "moduleResolution": "Bundler",
     "types": ["node", "vite/client"],
     "resolveJsonModule": true,
+    "erasableSyntaxOnly": true,
+    "libReplacement": false,
     "declaration": true,
+    "isolatedDeclarations": true,
     "isolatedModules": true,
     "verbatimModuleSyntax": true,
-    "isolatedDeclarations": true,
     "esModuleInterop": true,
     "strict": true,
     "skipLibCheck": true
   },
-  "include": [
-    "./src/**/*.ts",
-    "./tests/**/*.ts",
-    "./scripts/**/*.ts",
-    "./packages/**/*.ts"
-  ]
+  "include": ["./src/**/*.ts", "./tests/**/*.ts"]
 }
