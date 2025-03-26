@@ -1,7 +1,7 @@
 {
   "name": "find-npm-packages",
   "type": "module",
-  "version": "0.0.2",
+  "version": "0.1.0",
   "packageManager": "pnpm@10.6.5",
   "description": "Find npm packages from given source code.",
   "keywords": [
