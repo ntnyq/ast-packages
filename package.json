@@ -2,7 +2,7 @@
   "name": "find-npm-packages",
   "type": "module",
   "version": "0.1.0",
-  "packageManager": "pnpm@10.6.5",
+  "packageManager": "pnpm@10.7.0",
   "description": "Find npm packages from given source code.",
   "keywords": [
     "find",
@@ -57,7 +57,7 @@
     "@babel/types": "^7.27.0",
     "@ntnyq/eslint-config": "^4.0.2",
     "@ntnyq/prettier-config": "^2.0.0",
-    "@types/node": "^22.13.13",
+    "@types/node": "^22.13.14",
     "@types/validate-npm-package-name": "^4.0.2",
     "bumpp": "^10.1.0",
     "eslint": "^9.23.0",
