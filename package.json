@@ -1,63 +1,28 @@
 {
-  "name": "find-npm-packages",
+  "name": "@ntnyq/ast-packages",
   "type": "module",
-  "version": "0.1.0",
-  "packageManager": "pnpm@10.6.5",
-  "description": "Find npm packages from given source code.",
-  "keywords": [
-    "find",
-    "npm",
-    "packages"
-  ],
+  "version": "0.0.0",
+  "private": true,
+  "packageManager": "pnpm@10.7.0",
   "license": "MIT",
-  "author": {
-    "name": "ntnyq",
-    "email": "ntnyq13@gmail.com"
-  },
-  "homepage": "https://github.com/ntnyq/find-npm-packages#readme",
-  "repository": "ntnyq/find-npm-packages",
-  "bugs": {
-    "url": "https://github.com/ntnyq/find-npm-packages/issues"
-  },
-  "exports": {
-    "./package.json": "./package.json",
-    ".": {
-      "types": "./dist/index.d.mts",
-      "default": "./dist/index.mjs"
-    }
-  },
-  "main": "./dist/index.mjs",
-  "types": "./dist/index.d.mts",
-  "files": [
-    "dist"
-  ],
-  "publishConfig": {
-    "access": "public"
-  },
-  "sideEffects": false,
   "scripts": {
-    "build": "unbuild",
-    "dev": "unbuild --watch",
+    "build": "pnpm -r run build",
+    "dev": "pnpm -r run dev",
     "lint": "eslint",
     "prepare": "husky",
     "prepublishOnly": "pnpm run build",
     "release": "run-s release:check release:version release:publish",
     "release:check": "run-s lint typecheck test",
-    "release:publish": "pnpm publish",
-    "release:version": "bumpp",
+    "release:publish": "pnpm -r publish",
+    "release:version": "bumpp -r",
     "test": "vitest",
     "typecheck": "tsc --noEmit"
-  },
-  "dependencies": {
-    "@babel/parser": "^7.27.0",
-    "ast-kit": "^1.4.2",
-    "validate-npm-package-name": "^6.0.0"
   },
   "devDependencies": {
     "@babel/types": "^7.27.0",
     "@ntnyq/eslint-config": "^4.0.2",
     "@ntnyq/prettier-config": "^2.0.0",
-    "@types/node": "^22.13.13",
+    "@types/node": "^22.13.14",
     "@types/validate-npm-package-name": "^4.0.2",
     "bumpp": "^10.1.0",
     "eslint": "^9.23.0",
@@ -69,9 +34,6 @@
     "unbuild": "^3.5.0",
     "vite": "^6.2.3",
     "vitest": "^3.0.9"
-  },
-  "engines": {
-    "node": ">=18.18.0"
   },
   "nano-staged": {
     "*.{js,ts,mjs,cjs,md,yml,yaml,toml,json}": "eslint --fix"

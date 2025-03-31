@@ -1,0 +1,53 @@
+{
+  "name": "find-npm-packages",
+  "type": "module",
+  "version": "0.1.0",
+  "description": "Find npm packages from given source code.",
+  "keywords": [
+    "find",
+    "npm",
+    "packages"
+  ],
+  "license": "MIT",
+  "author": {
+    "name": "ntnyq",
+    "email": "ntnyq13@gmail.com"
+  },
+  "homepage": "https://github.com/ntnyq/ast-packages#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ntnyq/ast-packages.git",
+    "directory": "packages/find-npm-packages"
+  },
+  "bugs": {
+    "url": "https://github.com/ntnyq/ast-packages/issues"
+  },
+  "exports": {
+    "./package.json": "./package.json",
+    ".": {
+      "types": "./dist/index.d.mts",
+      "default": "./dist/index.mjs"
+    }
+  },
+  "main": "./dist/index.mjs",
+  "types": "./dist/index.d.mts",
+  "files": [
+    "dist"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "sideEffects": false,
+  "scripts": {
+    "build": "unbuild",
+    "dev": "unbuild --watch"
+  },
+  "dependencies": {
+    "@babel/parser": "^7.27.0",
+    "ast-kit": "^1.4.2",
+    "validate-npm-package-name": "^6.0.0"
+  },
+  "engines": {
+    "node": ">=18.18.0"
+  }
+}

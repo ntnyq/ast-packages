@@ -10,12 +10,11 @@
     "erasableSyntaxOnly": true,
     "libReplacement": false,
     "declaration": true,
-    "isolatedDeclarations": true,
     "isolatedModules": true,
     "verbatimModuleSyntax": true,
     "esModuleInterop": true,
     "strict": true,
     "skipLibCheck": true
   },
-  "include": ["./src/**/*.ts", "./tests/**/*.ts"]
+  "include": ["./src/**/*.ts", "./packages/**/*.ts"]
 }
