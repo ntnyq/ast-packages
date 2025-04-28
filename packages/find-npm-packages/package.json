@@ -44,7 +44,7 @@
   },
   "dependencies": {
     "@babel/parser": "^7.27.0",
-    "ast-kit": "^1.4.2",
+    "ast-kit": "^1.4.3",
     "validate-npm-package-name": "^6.0.0"
   },
   "engines": {
