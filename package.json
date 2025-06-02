@@ -19,13 +19,13 @@
     "typecheck": "tsc --noEmit"
   },
   "devDependencies": {
-    "@babel/types": "^7.27.1",
+    "@babel/types": "^7.27.3",
     "@ntnyq/eslint-config": "^4.3.0",
     "@ntnyq/prettier-config": "^2.2.0",
-    "@types/node": "^22.15.21",
+    "@types/node": "^22.15.29",
     "@types/validate-npm-package-name": "^4.0.2",
     "bumpp": "^10.1.1",
-    "eslint": "^9.27.0",
+    "eslint": "^9.28.0",
     "husky": "^9.1.7",
     "nano-staged": "^0.8.0",
     "npm-run-all2": "^8.0.4",
