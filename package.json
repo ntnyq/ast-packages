@@ -3,7 +3,7 @@
   "type": "module",
   "version": "0.0.0",
   "private": true,
-  "packageManager": "pnpm@10.11.0",
+  "packageManager": "pnpm@10.12.1",
   "license": "MIT",
   "scripts": {
     "build": "pnpm -r run build",
@@ -19,10 +19,10 @@
     "typecheck": "tsc --noEmit"
   },
   "devDependencies": {
-    "@babel/types": "^7.27.3",
+    "@babel/types": "^7.27.6",
     "@ntnyq/eslint-config": "^4.3.0",
     "@ntnyq/prettier-config": "^2.2.0",
-    "@types/node": "^22.15.29",
+    "@types/node": "^22.15.30",
     "@types/validate-npm-package-name": "^4.0.2",
     "bumpp": "^10.1.1",
     "eslint": "^9.28.0",
@@ -33,7 +33,7 @@
     "typescript": "^5.8.3",
     "unbuild": "^3.5.0",
     "vite": "^6.3.5",
-    "vitest": "^3.1.4"
+    "vitest": "^3.2.2"
   },
   "nano-staged": {
     "*.{js,ts,mjs,cjs,md,yml,yaml,toml,json}": "eslint --fix"
