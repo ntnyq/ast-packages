@@ -21,7 +21,7 @@
   "devDependencies": {
     "@babel/types": "^7.27.6",
     "@ntnyq/eslint-config": "^4.3.0",
-    "@ntnyq/prettier-config": "^2.2.0",
+    "@ntnyq/prettier-config": "^3.0.1",
     "@types/node": "^22.15.32",
     "@types/validate-npm-package-name": "^4.0.2",
     "bumpp": "^10.2.0",
