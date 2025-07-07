@@ -20,7 +20,7 @@
   },
   "devDependencies": {
     "@babel/types": "^7.27.7",
-    "@ntnyq/eslint-config": "^4.3.0",
+    "@ntnyq/eslint-config": "^5.0.0",
     "@ntnyq/prettier-config": "^3.0.1",
     "@types/node": "^22.15.34",
     "@types/validate-npm-package-name": "^4.0.2",
