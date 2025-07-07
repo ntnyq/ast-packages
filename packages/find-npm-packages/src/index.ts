@@ -46,7 +46,7 @@ export function findNpmPackages(
   function checkNpmPackageName(stringLiteral: t.StringLiteral) {
     const name = getValidNpmPackageName(stringLiteral.value)
 
-    if (!name) return
+    if (!name) {return}
 
     const start = stringLiteral.start
     const loc = stringLiteral.loc
