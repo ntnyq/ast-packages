@@ -21,7 +21,7 @@ importers:
         specifier: ^3.0.1
         version: 3.0.1
       '@types/node':
-        specifier: ^22.18.1
+        specifier: ^22.18.3
         version: 22.18.3
       '@types/validate-npm-package-name':
         specifier: ^4.0.2
