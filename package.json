@@ -32,7 +32,7 @@
     "typescript": "^5.9.3",
     "unbuild": "^3.6.1",
     "vite": "^7.2.2",
-    "vitest": "^3.2.4"
+    "vitest": "^4.0.9"
   },
   "nano-staged": {
     "*.{js,ts,mjs,cjs,md,yml,yaml,toml,json}": "eslint --fix"
