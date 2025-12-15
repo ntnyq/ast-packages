@@ -28,11 +28,11 @@
     "husky": "^9.1.7",
     "nano-staged": "^0.9.0",
     "npm-run-all2": "^8.0.4",
-    "prettier": "^3.7.3",
+    "prettier": "^3.7.4",
     "typescript": "^5.9.3",
     "unbuild": "^3.6.1",
-    "vite": "^7.2.4",
-    "vitest": "^4.0.14"
+    "vite": "^7.2.7",
+    "vitest": "^4.0.15"
   },
   "nano-staged": {
     "*.{js,ts,mjs,cjs,md,yml,yaml,toml,json}": "eslint --fix"
