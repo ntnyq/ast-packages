@@ -3,7 +3,7 @@
   "type": "module",
   "version": "0.0.0",
   "private": true,
-  "packageManager": "pnpm@10.26.2",
+  "packageManager": "pnpm@10.27.0",
   "license": "MIT",
   "scripts": {
     "build": "pnpm -r run build",
@@ -19,7 +19,7 @@
   },
   "devDependencies": {
     "@babel/types": "^7.28.5",
-    "@ntnyq/eslint-config": "^5.8.0",
+    "@ntnyq/eslint-config": "^5.9.0",
     "@ntnyq/prettier-config": "^3.0.1",
     "@types/node": "^24.10.4",
     "@types/validate-npm-package-name": "^4.0.2",
