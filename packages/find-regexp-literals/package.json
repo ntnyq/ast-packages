@@ -43,7 +43,7 @@
     "dev": "unbuild --watch"
   },
   "dependencies": {
-    "@babel/parser": "^7.29.0",
+    "@babel/parser": "^7.29.2",
     "ast-kit": "^2.2.0"
   },
   "engines": {
