@@ -21,7 +21,7 @@
     "@babel/types": "^7.29.0",
     "@ntnyq/eslint-config": "^5.9.0",
     "@ntnyq/prettier-config": "^3.0.1",
-    "@types/node": "^24.12.0",
+    "@types/node": "^24.12.2",
     "@types/validate-npm-package-name": "^4.0.2",
     "bumpp": "^11.0.1",
     "eslint": "^9.39.4",
