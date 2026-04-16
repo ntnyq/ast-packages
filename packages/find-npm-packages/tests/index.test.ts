@@ -32,7 +32,7 @@ it('basic', () => {
 
 it('js', () => {
   expect(
-    findNpmPackages(FIXTURE_JS.replace(/\r\n/g, '\n'), {
+    findNpmPackages(FIXTURE_JS.replaceAll('\r\n', '\n'), {
       language: 'js',
     }),
   ).toMatchSnapshot()
@@ -40,7 +40,7 @@ it('js', () => {
 
 it('ts', () => {
   expect(
-    findNpmPackages(FIXTURE_TS.replace(/\r\n/g, '\n'), {
+    findNpmPackages(FIXTURE_TS.replaceAll('\r\n', '\n'), {
       language: 'ts',
     }),
   ).toMatchSnapshot()
@@ -48,7 +48,7 @@ it('ts', () => {
 
 it('dts', () => {
   expect(
-    findNpmPackages(FIXTURE_DTS.replace(/\r\n/g, '\n'), {
+    findNpmPackages(FIXTURE_DTS.replaceAll('\r\n', '\n'), {
       language: 'dts',
     }),
   ).toMatchSnapshot()
@@ -56,7 +56,7 @@ it('dts', () => {
 
 it('jsx', () => {
   expect(
-    findNpmPackages(FIXTURE_JSX.replace(/\r\n/g, '\n'), {
+    findNpmPackages(FIXTURE_JSX.replaceAll('\r\n', '\n'), {
       language: 'jsx',
     }),
   ).toMatchSnapshot()

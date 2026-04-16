@@ -5,16 +5,14 @@
     "moduleDetection": "force",
     "module": "ESNext",
     "moduleResolution": "Bundler",
-    "types": ["node", "vite/client"],
+    "types": ["node"],
     "resolveJsonModule": true,
     "erasableSyntaxOnly": true,
     "libReplacement": false,
-    "declaration": true,
     "isolatedModules": true,
     "verbatimModuleSyntax": true,
     "esModuleInterop": true,
     "strict": true,
     "skipLibCheck": true
-  },
-  "include": ["./src/**/*.ts", "./packages/**/*.ts"]
+  }
 }

@@ -1,6 +1,6 @@
+import type * as t from '@babel/types'
 import { babelParse, walkAST } from 'ast-kit'
 import validateNpmPackageName from 'validate-npm-package-name'
-import type * as t from '@babel/types'
 import type { NpmPackage, Options } from './types'
 
 const RE_PACKAGE_NAME = /^(@[^/]+\/[^/@]+|[^/@]+)/
@@ -87,9 +87,9 @@ export function findNpmPackages(
           node.callee.type === 'Identifier' && node.callee.name === 'require'
 
         if (
-          (isImportExpression || isRequireExpression)
-          && node.arguments[0]
-          && node.arguments[0].type === 'StringLiteral'
+          (isImportExpression || isRequireExpression) &&
+          node.arguments[0] &&
+          node.arguments[0].type === 'StringLiteral'
         ) {
           checkNpmPackageName(node.arguments[0])
         }
