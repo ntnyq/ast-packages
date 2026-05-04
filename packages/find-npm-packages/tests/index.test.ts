@@ -5,7 +5,7 @@ import FIXTURE_JS from './fixtures/js.js?raw'
 import FIXTURE_JSX from './fixtures/jsx.jsx?raw'
 import FIXTURE_TS from './fixtures/ts.ts?raw'
 
-it('basic', () => {
+test('basic', () => {
   expect(findNpmPackages(`import findNpmPackages from 'find-npm-packages'`))
     .toMatchInlineSnapshot(`
       [
@@ -30,7 +30,7 @@ it('basic', () => {
     `)
 })
 
-it('js', () => {
+test('js', () => {
   expect(
     findNpmPackages(FIXTURE_JS.replaceAll('\r\n', '\n'), {
       language: 'js',
@@ -38,7 +38,7 @@ it('js', () => {
   ).toMatchSnapshot()
 })
 
-it('ts', () => {
+test('ts', () => {
   expect(
     findNpmPackages(FIXTURE_TS.replaceAll('\r\n', '\n'), {
       language: 'ts',
@@ -46,7 +46,7 @@ it('ts', () => {
   ).toMatchSnapshot()
 })
 
-it('dts', () => {
+test('dts', () => {
   expect(
     findNpmPackages(FIXTURE_DTS.replaceAll('\r\n', '\n'), {
       language: 'dts',
@@ -54,7 +54,7 @@ it('dts', () => {
   ).toMatchSnapshot()
 })
 
-it('jsx', () => {
+test('jsx', () => {
   expect(
     findNpmPackages(FIXTURE_JSX.replaceAll('\r\n', '\n'), {
       language: 'jsx',
