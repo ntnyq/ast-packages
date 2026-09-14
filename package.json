@@ -31,7 +31,7 @@
     "oxlint": "^1.60.0",
     "tsdown": "^0.21.9",
     "typescript": "^7.0.2",
-    "vitest": "^4.1.4"
+    "vitest": "^5.0.0"
   },
   "nano-staged": {
     "*.{js,ts,mjs,tsx}": "oxlint --fix",
