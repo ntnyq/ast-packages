@@ -1,4 +1,4 @@
-import { expect, it } from 'vitest'
+import { expect, test } from 'vitest'
 import { findNpmPackages } from '../src'
 import FIXTURE_DTS from './fixtures/dts.d.ts?raw'
 import FIXTURE_JS from './fixtures/js.js?raw'

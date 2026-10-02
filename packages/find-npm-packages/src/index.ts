@@ -27,15 +27,15 @@ export function findNpmPackages(
   options: Options = {},
 ): NpmPackage[] {
   const { language = 'js' } = options,
-   program = babelParse(code, language, options),
-   packages: NpmPackage[] = []
+    program = babelParse(code, language, options),
+    packages: NpmPackage[] = []
 
   function getValidNpmPackageName(importString: string) {
     const match = importString.match(RE_PACKAGE_NAME)
 
     if (match) {
       const name = match[0],
-       result = validateNpmPackageName(name)
+        result = validateNpmPackageName(name)
 
       if (result.validForNewPackages || result.validForOldPackages) {
         return name
@@ -51,7 +51,7 @@ export function findNpmPackages(
     }
 
     const start = stringLiteral.start,
-     loc = stringLiteral.loc
+      loc = stringLiteral.loc
 
     if (start && loc) {
       packages.push({
@@ -83,8 +83,8 @@ export function findNpmPackages(
       // NOTE: ImportExpression is not supported
       if (node.type === 'CallExpression') {
         const isImportExpression = node.callee.type === 'Import',
-         isRequireExpression =
-          node.callee.type === 'Identifier' && node.callee.name === 'require'
+          isRequireExpression =
+            node.callee.type === 'Identifier' && node.callee.name === 'require'
 
         if (
           (isImportExpression || isRequireExpression) &&
