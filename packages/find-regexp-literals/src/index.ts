@@ -5,9 +5,9 @@ export function findRegExpLiterals(
   code: string,
   options: Options = {},
 ): RegExpLiteral[] {
-  const { language = 'js' } = options
-  const program = babelParse(code, language, options)
-  const result: RegExpLiteral[] = []
+  const { language = 'js' } = options,
+   program = babelParse(code, language, options),
+   result: RegExpLiteral[] = []
 
   walkAST(program, {
     enter(node) {
