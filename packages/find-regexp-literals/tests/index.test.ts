@@ -1,7 +1,81 @@
-import { describe, expect, it } from 'vitest'
+import { describe, expect, expectTypeOf, it } from 'vitest'
 import { findRegExpLiterals } from '../src'
+import type { Options, RegExpLiteral } from '../src'
 
 describe('find-regexp-literals', () => {
+  it('exports the public option and result types', () => {
+    expect.assertions(0)
+    expectTypeOf<Parameters<typeof findRegExpLiterals>[1]>().toEqualTypeOf<
+      Options | undefined
+    >()
+    expectTypeOf<ReturnType<typeof findRegExpLiterals>>().toEqualTypeOf<
+      RegExpLiteral[]
+    >()
+  })
+
+  it('does not reuse cached parser locations', () => {
+    expect.assertions(1)
+    const code = '/cached/g'
+    findRegExpLiterals(code, { cache: true })
+    expect(
+      findRegExpLiterals(code, {
+        cache: true,
+        startLine: 3,
+        startColumn: 4,
+        startIndex: 100,
+      }),
+    ).toMatchObject([
+      {
+        pattern: 'cached',
+        flags: 'g',
+        start: 100,
+        end: 109,
+        loc: {
+          start: { line: 3, column: 4, index: 100 },
+          end: { line: 3, column: 13, index: 109 },
+        },
+      },
+    ])
+  })
+
+  it('does not reuse cached parses across languages', () => {
+    expect.assertions(1)
+    const code = 'const pattern: RegExp = /cached-language/g'
+    findRegExpLiterals(code, { cache: true, language: 'ts' })
+    expect(() => findRegExpLiterals(code, { cache: true })).toThrow(SyntaxError)
+  })
+
+  it('does not reuse cached parses across parser options', () => {
+    expect.assertions(1)
+    const code = 'return /cached-return/g'
+    findRegExpLiterals(code, { cache: true, allowReturnOutsideFunction: true })
+    expect(() => findRegExpLiterals(code, { cache: true })).toThrow(SyntaxError)
+  })
+
+  it('keeps cached locations independent of caller mutations', () => {
+    expect.assertions(2)
+    const code = '/cached-independent/g'
+    const first = findRegExpLiterals(code, { cache: true })
+    const expected = structuredClone(first)
+    first[0].loc!.start!.line = 99
+    expect(findRegExpLiterals(code, { cache: true })).toStrictEqual(expected)
+    expect(findRegExpLiterals(code)).toStrictEqual(expected)
+  })
+
+  it('rejects the estree plugin explicitly', () => {
+    expect.assertions(1)
+    expect(() => findRegExpLiterals('/foo/g', { plugins: ['estree'] })).toThrow(
+      'The estree parser plugin is not supported',
+    )
+  })
+
+  it('finds literals when source locations are disabled', () => {
+    expect.assertions(1)
+    expect(findRegExpLiterals('/foo/g', { locations: false })).toMatchObject([
+      { pattern: 'foo', flags: 'g', start: 0, end: 6 },
+    ])
+  })
+
   it('returns the pattern, flags and source location', () => {
     expect.assertions(1)
     expect(findRegExpLiterals('/foo/gi')).toMatchObject([

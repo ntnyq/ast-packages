@@ -1,11 +1,11 @@
 {
   "name": "find-regexp-literals",
   "version": "0.0.0",
-  "description": "Find npm packages from given source code.",
+  "description": "Find regular expression literals from given source code.",
   "keywords": [
+    "ast",
     "find",
-    "npm",
-    "packages"
+    "regexp"
   ],
   "homepage": "https://github.com/ntnyq/ast-packages#readme",
   "bugs": {
@@ -47,6 +47,6 @@
     "ast-kit": "^3.0.0"
   },
   "engines": {
-    "node": ">=22.16.0"
+    "node": "^22.18.0 || >=24.11.0"
   }
 }

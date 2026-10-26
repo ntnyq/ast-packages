@@ -2,7 +2,7 @@ import type { ParserOptions } from '@babel/parser'
 
 export interface Options extends ParserOptions {
   /**
-   * Parse code cache
+   * Cache up to 100 parsed sources, keyed by code, language and parser options.
    */
   cache?: boolean
 

@@ -5,6 +5,12 @@
 
 Find npm packages from given source code.
 
+Supports static imports, dynamic imports, `require()`, re-exports, TypeScript
+import types and import-equals declarations. Node.js built-in modules and local
+paths are excluded. Repeated references are preserved in source order.
+
+Requires Node.js `^22.22.2 || ^24.15.0 || >=26.0.0`.
+
 ## Install
 
 ```shell
@@ -56,6 +62,15 @@ console.log(result)
 
 - **Type**: `(code: string, options: Options = {}) => NpmPackage[]`
 
+Parser options are forwarded to Babel. Invalid source throws `SyntaxError`.
+`locations: false` and the `estree` plugin are unsupported and throw `TypeError`.
+`start` and `end` are UTF-16 source offsets with an exclusive end, including
+`startIndex` when supplied. Ranges cover the raw package name without quotes or
+subpaths, including any escape sequences or line continuations in that name.
+
+With `cache: true`, up to 100 parsed sources are retained per package instance.
+Cache entries distinguish code, language and parser options.
+
 ## Interface
 
 ```ts
@@ -63,8 +78,8 @@ import type { ParserOptions } from '@babel/parser'
 
 export interface NpmPackage {
   name: string
-  end: number
-  start: number
+  end: number | null
+  start: number | null
   loc: {
     end: Position
     start: Position
@@ -73,7 +88,7 @@ export interface NpmPackage {
 
 export interface Options extends ParserOptions {
   /**
-   * Parse code cache
+   * Cache up to 100 parsed sources, keyed by code, language and parser options.
    */
   cache?: boolean
 
