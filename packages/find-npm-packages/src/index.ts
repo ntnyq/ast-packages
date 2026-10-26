@@ -12,6 +12,14 @@ const RE_PACKAGE_NAME = /^(?:@[^/]+\/[^/@]+|[^/@]+)/u
 const MAX_CACHE_SIZE = 100
 const PARSE_CACHE = new Map<string, ReturnType<typeof babelParse>>()
 
+function unwrapParenthesizedExpression(node: t.Node): t.Node {
+  let expression = node
+  while (expression.type === 'ParenthesizedExpression') {
+    expression = expression.expression
+  }
+  return expression
+}
+
 function getValidNpmPackageName(importString: string) {
   const match = importString.match(RE_PACKAGE_NAME)
 
@@ -76,7 +84,11 @@ export function findNpmPackages(
   }
   const packages: NpmPackage[] = []
 
-  function checkNpmPackageName(stringLiteral: t.StringLiteral) {
+  function checkNpmPackageName(node: t.Node) {
+    const stringLiteral = unwrapParenthesizedExpression(node)
+    if (stringLiteral.type !== 'StringLiteral') {
+      return
+    }
     const name = getValidNpmPackageName(stringLiteral.value)
 
     if (!name) {
@@ -111,28 +123,25 @@ export function findNpmPackages(
         checkNpmPackageName(node.expression)
       }
 
-      if (
-        node.type === 'ImportExpression' &&
-        node.source.type === 'StringLiteral'
-      ) {
+      if (node.type === 'ImportExpression') {
         checkNpmPackageName(node.source)
       }
 
       if (node.type === 'CallExpression') {
-        const isImportExpression = node.callee.type === 'Import'
+        const callee = unwrapParenthesizedExpression(node.callee)
+        const isImportExpression = callee.type === 'Import'
         const isRequireExpression =
-          node.callee.type === 'Identifier' && node.callee.name === 'require'
+          callee.type === 'Identifier' && callee.name === 'require'
 
-        if (
-          (isImportExpression || isRequireExpression) &&
-          node.arguments[0] &&
-          node.arguments[0].type === 'StringLiteral'
-        ) {
+        if ((isImportExpression || isRequireExpression) && node.arguments[0]) {
           checkNpmPackageName(node.arguments[0])
         }
       }
     },
   })
 
-  return packages
+  // Babel's AST property order can differ from source order.
+  return packages.toSorted(
+    (left, right) => left.loc.start.index - right.loc.start.index,
+  )
 }

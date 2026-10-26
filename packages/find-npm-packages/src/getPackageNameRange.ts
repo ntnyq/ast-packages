@@ -1,8 +1,9 @@
 import type { StringLiteral } from '@babel/types'
 import type { NpmPackage } from './types'
 
+// Legacy octal escapes consume up to three digits, or two after 4-7.
 const RE_STRING_CHARACTER =
-  /\\(?:u\{[\da-f]+\}|u[\da-f]{4}|x[\da-f]{2}|\r\n|[\s\S])|[^\\]/giu
+  /\\(?:u\{[\dA-Fa-f]+\}|u[\dA-Fa-f]{4}|x[\dA-Fa-f]{2}|[0-3][0-7]{0,2}|[4-7][0-7]?|\r\n|[\s\S])|[^\\]/gu
 const RE_LINE_CONTINUATION = /^\\(?:\r\n|[\n\r\u2028\u2029])$/u
 const RE_LINE_BREAK = /\r\n|[\n\r\u2028\u2029]/gu
 

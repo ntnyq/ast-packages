@@ -53,6 +53,10 @@ describe('find-npm-packages', () => {
     [String.raw`lo\u0064ash`, 'lodash', { line: 1, column: 19 }],
     [String.raw`lo\x64ash`, 'lodash', { line: 1, column: 17 }],
     [String.raw`lo\u{64}ash`, 'lodash', { line: 1, column: 19 }],
+    [String.raw`lo\u006Aash`, 'lojash', { line: 1, column: 19 }],
+    [String.raw`lo\x6Aash`, 'lojash', { line: 1, column: 17 }],
+    [String.raw`fo\U0061`, 'foU0061', { line: 1, column: 16 }],
+    [String.raw`fo\X64ash`, 'foX64ash', { line: 1, column: 17 }],
     [String.raw`@scope\/pkg`, '@scope/pkg', { line: 1, column: 19 }],
     ['lo\\\ndash', 'lodash', { line: 2, column: 4 }],
     ['lo\\\r\ndash', 'lodash', { line: 2, column: 4 }],
@@ -79,6 +83,101 @@ describe('find-npm-packages', () => {
       },
     ])
   })
+
+  it.each([
+    [String.raw`lo\144ash`, 'lodash'],
+    [String.raw`\146oo`, 'foo'],
+    [String.raw`f\61`, 'f1'],
+    [String.raw`f\615`, 'f15'],
+    [String.raw`f\0615`, 'f15'],
+  ])('tracks the raw range of legacy octal escapes in %j', (rawName, name) => {
+    expect.assertions(1)
+    const code = `require('${rawName}/subpath')`
+    const start = code.indexOf("'") + 1
+    const end = start + rawName.length
+
+    expect(
+      findNpmPackages(code, {
+        sourceType: 'commonjs',
+        startLine: 3,
+        startColumn: 4,
+        startIndex: 100,
+      }),
+    ).toStrictEqual([
+      {
+        name,
+        start: start + 100,
+        end: end + 100,
+        loc: {
+          start: { line: 3, column: start + 4, index: start + 100 },
+          end: { line: 3, column: end + 4, index: end + 100 },
+        },
+      },
+    ])
+  })
+
+  it.each([
+    [
+      "const f = (p = require('first')): import('second').T => require('third')",
+      ['first', 'second', 'third'],
+    ],
+    [
+      "const f = <T extends import('first').T>(p: import('second').T) => import('third')",
+      ['first', 'second', 'third'],
+    ],
+    [
+      "const f = (p = require('first')): import('first').T => require('third')",
+      ['first', 'first', 'third'],
+    ],
+  ])(
+    'returns arrow function dependencies in source order for %s',
+    (code, names) => {
+      expect.assertions(2)
+      const packages = findNpmPackages(code, { language: 'ts' })
+
+      expect(packages.map(pkg => pkg.name)).toStrictEqual(names)
+      expect(packages.map(pkg => pkg.start)).toStrictEqual(
+        Array.from(code.matchAll(/'[^']+'/gu), match => match.index + 1),
+      )
+    },
+  )
+
+  it.each([
+    "require(('foo'))",
+    "require(((('foo'))))",
+    "(require)('foo')",
+    "((require))((('foo')))",
+    "import(('foo'))",
+    "import(((('foo'))))",
+  ])('finds dependencies through explicit parentheses in %s', code => {
+    expect.assertions(2)
+    const expected = findNpmPackages(code)
+
+    expect(expected.map(pkg => pkg.name)).toStrictEqual(['foo'])
+    expect(
+      findNpmPackages(code, { createParenthesizedExpressions: true }),
+    ).toStrictEqual(expected)
+  })
+
+  it('finds parenthesized imports with legacy import nodes', () => {
+    expect.assertions(1)
+    expect(
+      findNpmPackages("import((('foo')))", {
+        createImportExpressions: false,
+        createParenthesizedExpressions: true,
+      }).map(pkg => pkg.name),
+    ).toStrictEqual(['foo'])
+  })
+
+  it.each(['require((packageName))', 'import((packageName))'])(
+    'ignores non-literal sources inside parentheses in %s',
+    code => {
+      expect.assertions(1)
+      expect(
+        findNpmPackages(code, { createParenthesizedExpressions: true }),
+      ).toStrictEqual([])
+    },
+  )
 
   it('preserves escaped ranges with parser offsets', () => {
     expect.assertions(1)
