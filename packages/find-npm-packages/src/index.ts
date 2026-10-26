@@ -3,7 +3,20 @@ import { babelParse, walkAST } from 'ast-kit'
 import validateNpmPackageName from 'validate-npm-package-name'
 import type { NpmPackage, Options } from './types'
 
-const RE_PACKAGE_NAME = /^(@[^/]+\/[^/@]+|[^/@]+)/
+const RE_PACKAGE_NAME = /^(?:@[^/]+\/[^/@]+|[^/@]+)/u
+
+function getValidNpmPackageName(importString: string) {
+  const match = importString.match(RE_PACKAGE_NAME)
+
+  if (match) {
+    const name = match[0]
+    const result = validateNpmPackageName(name)
+
+    if (result.validForNewPackages || result.validForOldPackages) {
+      return name
+    }
+  }
+}
 
 /**
  * Find npm packages from given source code.
@@ -26,22 +39,9 @@ export function findNpmPackages(
   code: string,
   options: Options = {},
 ): NpmPackage[] {
-  const { language = 'js' } = options,
-    program = babelParse(code, language, options),
-    packages: NpmPackage[] = []
-
-  function getValidNpmPackageName(importString: string) {
-    const match = importString.match(RE_PACKAGE_NAME)
-
-    if (match) {
-      const name = match[0],
-        result = validateNpmPackageName(name)
-
-      if (result.validForNewPackages || result.validForOldPackages) {
-        return name
-      }
-    }
-  }
+  const { language = 'js' } = options
+  const program = babelParse(code, language, options)
+  const packages: NpmPackage[] = []
 
   function checkNpmPackageName(stringLiteral: t.StringLiteral) {
     const name = getValidNpmPackageName(stringLiteral.value)
@@ -50,8 +50,8 @@ export function findNpmPackages(
       return
     }
 
-    const start = stringLiteral.start,
-      loc = stringLiteral.loc
+    const start = stringLiteral.start
+    const loc = stringLiteral.loc
 
     if (start && loc) {
       packages.push({
@@ -80,11 +80,17 @@ export function findNpmPackages(
         checkNpmPackageName(node.source)
       }
 
-      // NOTE: ImportExpression is not supported
+      if (
+        node.type === 'ImportExpression' &&
+        node.source.type === 'StringLiteral'
+      ) {
+        checkNpmPackageName(node.source)
+      }
+
       if (node.type === 'CallExpression') {
-        const isImportExpression = node.callee.type === 'Import',
-          isRequireExpression =
-            node.callee.type === 'Identifier' && node.callee.name === 'require'
+        const isImportExpression = node.callee.type === 'Import'
+        const isRequireExpression =
+          node.callee.type === 'Identifier' && node.callee.name === 'require'
 
         if (
           (isImportExpression || isRequireExpression) &&
