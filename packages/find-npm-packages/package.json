@@ -43,7 +43,7 @@
     "dev": "tsdown --watch"
   },
   "dependencies": {
-    "@babel/parser": "^8.0.8",
+    "@babel/parser": "^8.0.10",
     "ast-kit": "^3.0.0",
     "validate-npm-package-name": "^8.0.0"
   },
